@@ -1,0 +1,25 @@
+{
+    "data_dir": "{repo_root}/data",
+    "data_files": {
+        "cofog": {
+            "path": "cofog.csv",
+            "url": "http://www.archive.org/download/ckan-cofog/cofog.csv"
+        },
+        "cofog_dejargonise": {
+            "path": "cofog_dejargonise.csv",
+            "url": "https://spreadsheets.google.com/tq?tqx=out:csv&key=tQSJ9dxTh8AKl-ON4Qqja8Q"
+        },
+        "cra_cofog_map": {
+            "path": "cra_cofog_map.json",
+            "url": "http://ckan.net/storage/f/file/36b85685-12b4-44c8-90c3-2e9bbd3d954b"
+        },
+        "cra2010_table9": {
+            "path": "cra2010_table9.xls",
+            "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter9.xls"
+        },
+        "cra2010_table10": {
+            "path": "cra2010_table10.xls",
+            "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter10.xls"
+        }
+    }
+}
