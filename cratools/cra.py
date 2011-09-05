@@ -94,6 +94,18 @@ def wdmmg_color(code):
     else:
         return ''
 
+def make_uid_generator():
+  ids = {}
+  def get_id_for_year(year):
+      if year in ids:
+          ids[year] += 1
+      else:
+          ids[year] = 0
+      return '%s-%s' % (year, ids[year])
+  return get_id_for_year
+
+uid_generator = make_uid_generator()
+
 def cra2010_clean(config, out=sys.stdout):
     global cofog, cra_cofog_mapper
 
@@ -231,6 +243,7 @@ def cra2010_clean(config, out=sys.stdout):
     cleancsv = csv.writer(out)
 
     cleancsv.writerow([
+        'unique_id',
         'dept_code', 'dept_name',
         'cofog_level1_code', 'cofog_level1_name', 'wdmmg_cofog1_color',
         'cofog_level2_code', 'cofog_level2_name', 'wdmmg_cofog2_color',
@@ -259,6 +272,7 @@ def cra2010_clean(config, out=sys.stdout):
                 pog_alias = pog_alias[len(pog + ' '):]
 
             row = [
+                uid_generator(tax_year),
                 joint_item['dept_code'], joint_item['dept_name'],
                 cofog_codes[0], cofog_names[0], wdmmg_color(cofog_codes[0]),
                 cofog_codes[1], cofog_names[1], wdmmg_color(cofog_codes[1]),
