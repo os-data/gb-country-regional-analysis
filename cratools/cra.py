@@ -263,6 +263,13 @@ def cra2010_clean(config, out=sys.stdout):
         for year in spending_years:
             tax_year = '20' + year[:2]
             source_amount = joint_item['spending_' + year]
+
+            # Known bad values
+            if source_amount in ['`']:
+                log.warn("Found amount value '%s', converting to '0.0' to prevent errors. "
+                         "Joint line:\n  %s", source_amount, joint_item)
+                source_amount = '0.0'
+
             amount = 0 if source_amount == '' else AMOUNT_MULTIPLIER * float(source_amount)
 
             pog = joint_item['pog']
