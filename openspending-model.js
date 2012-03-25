@@ -4,137 +4,213 @@
     "name": "ukgov-finances-cra",
     "label": "UK Country Regional Analysis",
     "description": "The Country Regional Analysis published by HM Treasury (2010 version).\n\nSource data can be found in the [CKAN data package](http://ckan.net/package/ukgov-finances-cra)",
-    "currency": "GBP",
-    "unique_keys": ["unique_id"]
+    "currency": "GBP"
   },
   "mapping": {
     "from": {
       "type": "entity",
-      "fields": [
-        {"column": "dept_code", "datatype": "string", "name": "name"},
-        {"column": "dept_name", "datatype": "string", "name": "label"},
-        {"constant": "true", "datatype": "constant", "name": "gov_department"}
-      ],
+      "attributes": {
+        "name": {
+          "column": "dept_code",
+          "datatype": "id"
+        },
+        "label": {
+          "column": "dept_name",
+          "datatype": "string"
+        }
+      },
       "label": "Paid from",
-      "description": "The entity that the money was paid from"
-    },
-    "to": {
-      "type": "entity",
-      "fields": [
-        {"constant": "society", "datatype": "constant", "name": "name"},
-        {"constant": "Society (the General Public)", "datatype": "constant", "name": "label"},
-        {"constant": "A dummy entity to be the recipient of final government spending.", "datatype": "constant", "name": "description"}
-      ],
-      "label": "Paid to",
-      "description": "The entity that the money was paid to"
+      "description": "The entity that the money was paid from",
+      "facet": true
     },
     "time": {
-      "type": "value",
+      "type": "date",
+      "datatype": "date",
       "column": "tax_year",
       "label": "Tax year",
-      "description": "The accounting period in which the spending happened",
-      "datatype": "date"
+      "description": "The accounting period in which the spending happened"
     },
     "amount": {
       "column": "amount",
-      "label": "",
+      "label": "Amount",
       "description": "",
+      "type": "measure",
       "datatype": "float",
-      "type": "value"
+      "default_value": "0.0"
     },
     "unique_id": {
       "column": "unique_id",
       "label": "Unique ID",
       "description": "Dataset-specific unique identifier for transaction",
       "datatype": "string",
-      "type": "value"
+      "type": "value",
+      "datatype": "id",
+      "key": true
     },
     "pog": {
       "type": "classifier",
-      "fields": [
-        {"column": "pog", "datatype": "string", "name": "name"},
-        {"column": "pog_alias", "datatype": "string", "name": "label"}
-      ],
+      "attributes": {
+        "name": { 
+          "column": "pog",
+          "datatype": "id"
+        },
+        "label": { 
+          "column": "pog_alias",
+          "datatype": "string"
+        }
+      },
       "label": "Programme Object Group",
-      "taxonomy": "cra-pog"
+      "facet": true
     },
     "cap_or_cur": {
       "type": "classifier",
-      "fields": [
-        {"column": "cap_or_cur", "datatype": "string", "name": "label"}
-      ],
+      "attributes": {
+        "name": { 
+          "column": "cap_or_cur",
+          "datatype": "id"
+        },
+        "label": { 
+          "column": "cap_or_cur",
+          "datatype": "string"
+        }
+      },
       "label": "Capital/current",
       "description": "Capital (one-off investment) or Current (on-going running costs)",
-      "taxonomy": "cra-cap_or_cur"
+      "taxonomy": "cra-cap_or_cur",
+      "facet": true
     },
     "cg_lg_or_pc": {
       "type": "classifier",
-      "fields": [
-        {"column": "cg_lg_or_pc", "datatype": "string", "name": "label"}
-      ],
+      "attributes": {
+        "name": { 
+          "column": "cg_lg_or_pc",
+          "datatype": "id"
+        },
+        "label": { 
+          "column": "cg_lg_or_pc",
+          "datatype": "string"
+        }
+      },
       "label": "CG, LG or PC",
       "description": "Central government, local government or public corporation",
-      "taxonomy": "cra-cg_lg_or_pc"
+      "facet": true
     },
     "region": {
       "type": "classifier",
-      "fields": [
-        {"column": "nuts_region", "datatype": "string", "name": "label"}
-      ],
+      "attributes": {
+        "name": { 
+          "column": "nuts_region",
+          "datatype": "id"
+        },
+        "label": { 
+          "column": "nuts_region",
+          "datatype": "string"
+        }
+      },
       "label": "Geographic region",
       "description": "Geographical (NUTS) area for which money was spent",
-      "taxonomy": "cra-region"
+      "facet": true
     },
     "hmt1": {
       "type": "classifier",
-      "fields": [
-        {"column": "hmt_functional", "datatype": "string", "name": "label"}
-      ],
+      "attributes": {
+        "name": { 
+          "column": "hmt_functional",
+          "datatype": "id"
+        },
+        "label": { 
+          "column": "hmt_functional",
+          "datatype": "string"
+        }
+      },
       "label": "HMT Function",
       "description": "HMT Functional Classification (Treasury equivalent of COFOG1)",
-      "taxonomy": "cra-hmt-level1"
+      "facet": true
     },
     "hmt2": {
       "type": "classifier",
-      "fields": [
-        {"column": "hmt_subfunctional", "datatype": "string", "name": "label"}
-      ],
+      "attributes": {
+        "name": { 
+          "column": "hmt_subfunctional",
+          "datatype": "id"
+        },
+        "label": { 
+          "column": "hmt_subfunctional",
+          "datatype": "string"
+        }
+      },
       "label": "HMT Sub-function",
       "description": "HMT Sub-functional Classification (Treasury equivalent of COFOG2)",
-      "taxonomy": "cra-hmt-level2"
+      "facet": true
     },
     "cofog1": {
       "type": "classifier",
-      "fields": [
-        {"column": "wdmmg_cofog1_color", "datatype": "string", "name": "color", "default_value": "#555555"},
-        {"column": "cofog_level1_code", "datatype": "string", "name": "name", "default_value": "unknown"},
-        {"column": "cofog_level1_name", "datatype": "string", "name": "label", "default_value": "Unknown"}
-      ],
+      "attributes": {
+        "color": {
+          "column": "wdmmg_cofog1_color",
+          "default_value": "#555555",
+          "datatype": "string"
+        },
+        "name": {
+          "column": "cofog_level1_code",
+          "default_value": "unknown",
+          "datatype": "id"
+        },
+        "label": {
+          "column": "cofog_level1_name",
+          "default_value": "Unknown",
+          "datatype": "string"
+        }
+      },
       "label": "COFOG level 1",
       "description": "Classification Of Function Of Government, level 1",
-      "taxonomy": "cofog-1"
+      "facet": true
     },
     "cofog2": {
       "type": "classifier",
-      "fields": [
-        {"column": "wdmmg_cofog2_color", "datatype": "string", "name": "color", "default_value": "#555555"},
-        {"column": "cofog_level2_code", "datatype": "string", "name": "name", "default_value": "unknown"},
-        {"column": "cofog_level2_name", "datatype": "string", "name": "label", "default_value": "Unknown"}
-      ],
+      "attributes": {
+        "color": {
+          "column": "wdmmg_cofog2_color",
+          "default_value": "#555555",
+          "datatype": "string"
+        },
+        "name": {
+          "column": "cofog_level2_code",
+          "default_value": "unknown",
+          "datatype": "id"
+        },
+        "label": {
+          "column": "cofog_level2_name",
+          "default_value": "Unknown",
+          "datatype": "string"
+        }
+      },
       "label": "COFOG level 2",
       "description": "Classification Of Function Of Government, level 2",
-      "taxonomy": "cofog-2"
+      "facet": true
     },
     "cofog3": {
       "type": "classifier",
-      "fields": [
-        {"column": "wdmmg_cofog3_color", "datatype": "string", "name": "color", "default_value": "#555555"},
-        {"column": "cofog_level3_code", "datatype": "string", "name": "name", "default_value": "unknown"},
-        {"column": "cofog_level3_name", "datatype": "string", "name": "label", "default_value": "Unknown"}
-      ],
+      "attributes": {
+        "color": {
+          "column": "wdmmg_cofog3_color",
+          "default_value": "#555555",
+          "datatype": "string"
+        },
+        "name": {
+          "column": "cofog_level3_code",
+          "default_value": "unknown",
+          "datatype": "id"
+        },
+        "label": {
+          "column": "cofog_level3_name",
+          "default_value": "Unknown",
+          "datatype": "string"
+        }
+      },
       "label": "COFOG level 3",
       "description": "Classification Of Function Of Government, level 3",
-      "taxonomy": "cofog-3"
+      "facet": true
     }
   },
   "views": [
@@ -152,7 +228,7 @@
       "name": "default",
       "dimension": "cofog1",
       "breakdown": "cofog2",
-      "filters": {"taxonomy": "cofog-1"}
+      "filters": {"taxonomy": "cofog1"}
     },
     {
       "entity": "classifier",
@@ -160,7 +236,7 @@
       "name": "default",
       "dimension": "cofog2",
       "breakdown": "cofog3",
-      "filters": {"taxonomy": "cofog-2"}
+      "filters": {"taxonomy": "cofog2"}
     },
     {
       "entity": "dataset",
@@ -184,7 +260,7 @@
       "name": "region",
       "dimension": "cofog1",
       "breakdown": "region",
-      "filters": {"taxonomy": "cofog-1"}
+      "filters": {"taxonomy": "cofog1"}
     },                              
     {
       "entity": "classifier",
@@ -192,7 +268,7 @@
       "name": "region",
       "dimension": "cofog2",
       "breakdown": "region",
-      "filters": {"taxonomy": "cofog-2"}
+      "filters": {"taxonomy": "cofog2"}
     },
     {
       "entity": "entity",
