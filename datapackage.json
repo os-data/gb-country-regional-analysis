@@ -1,0 +1,25 @@
+{
+  "name": "os-gb-gov-cra",
+  "title": "Country and Regional Analyses (CRA) - UK Government Finances",
+  "homepage": "https://www.gov.uk/government/publications/public-expenditure-statistical-analyses-2010",
+  "version": "0.1.0",
+  "license": "PDDL-1.0",
+  "sources": [{
+    "name": "HM Treasury PESA 2010",
+    "web": "https://www.gov.uk/government/publications/public-expenditure-statistical-analyses-2010",
+    "resources": [{
+      "name": "2010-chapter9",
+      "path": "archive/pesa_2010_database_tables_chapter9.xls",
+      "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter9.xls"
+      },
+      {
+        "name": "2010-chapter10",
+        "path": "archive/pesa_2010_database_tables_chapter9.xls",
+        "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter10.xls"
+      }
+    ]
+  }],
+  "resources": [
+  ],
+  "repository": "git://github.com/openspending/dpkg-cra.git"
+}
