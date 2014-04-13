@@ -109,17 +109,23 @@ uid_generator = make_uid_generator()
 def cra2010_clean(config, out=sys.stdout):
     global cofog, cra_cofog_mapper
 
-    cofog = Cofog(config.data_file('cofog'), config.data_file('cofog_dejargonise'))
-    cra_cofog_mapper = CRACofogMapper(json.load(config.data_file('cra_cofog_map')))
+    cofog = Cofog(
+        config.data_file('cofog.csv'),
+        config.data_file('cofog_dejargonise.csv'))
+    cra_cofog_mapper = CRACofogMapper(json.load(config.data_file('cra_cofog_map.json')))
 
     ###############################################
     # Load up original data.
     ###############################################
-    sheet9 = xlrd.open_workbook(file_contents=config.data_file('cra2010_table9').read())
+    sheet9 = xlrd.open_workbook(
+        file_contents=config.archive_file('pesa_2010_database_tables_chapter9.xls'
+            ).read())
     table9 = sheet9.sheet_by_index(0)
     entries9 = []
 
-    table10 = xlrd.open_workbook(file_contents=config.data_file('cra2010_table10').read())
+    table10 = xlrd.open_workbook(
+        file_contents=config.archive_file('pesa_2010_database_tables_chapter10.xls'
+            ).read())
     table10 = table10.sheet_by_index(0)
     entries10 = []
 
