@@ -289,6 +289,11 @@ def cra2010_clean(config, out=sys.stdout):
             if pog_alias.startswith(pog + ' '):
                 joint_item['pog_alias'] = pog_alias[len(pog + ' '):]
 
+            # assume this is an error where 99999 in excel has been parsed as a
+            # float
+            # Note 99999 is the "Dummy" Programme code (i.e. no programme)
+            if pog == '99999.0': pog = '99999'
+
             row = dict(joint_item)
             row.update({
                 'recid': uid_generator(tax_year),
