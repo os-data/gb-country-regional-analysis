@@ -3,6 +3,7 @@
 # Table 9 has regional breakdown, while table 10 has COFOG2 codes.
 # This script combines them and deals with inconsistencies.
 #############################################################
+
 import copy
 import csv
 import json
@@ -83,16 +84,6 @@ def cofog_from_hmt(func_orig, subfunc_orig):
 
     return cofog_parts_all, cofog_names_all
 
-
-def wdmmg_color(code):
-    if code:
-        try:
-            return cofog[code]['color']
-        except KeyError:
-            parent_code = cofog[code]['parent']
-            return wdmmg_color(parent_code)
-    else:
-        return ''
 
 def make_uid_generator():
   ids = {}
@@ -246,20 +237,34 @@ def cra2010_clean(config, out=sys.stdout):
     #####################################
     # Write matched items to csv.
     #####################################
-    cleancsv = csv.writer(out)
+    fields = [
+        'recid',
+        'dept_code',
+        # 'dept_name',
+        'cofog_level1_code',
+        # 'cofog_level1_name',
+        'cofog_level2_code',
+        # 'cofog_level2_name',
+        'cofog_level3_code',
+        # 'cofog_level3_name',
 
-    cleancsv.writerow([
-        'unique_id',
-        'dept_code', 'dept_name',
-        'cofog_level1_code', 'cofog_level1_name', 'wdmmg_cofog1_color',
-        'cofog_level2_code', 'cofog_level2_name', 'wdmmg_cofog2_color',
-        'cofog_level3_code', 'cofog_level3_name', 'wdmmg_cofog3_color',
-        'hmt_functional', 'hmt_subfunctional',
-        'pog', 'pog_alias',
-        'id_or_non_id', 'cap_or_cur', 'cg_lg_or_pc', 'nuts_region',
+        # we do not include these since these are converted to cofog
+        # NOTE: though that HMT definitions are sometimes subtly different
+        # TODO: possibly worth extracting and dumping somewhere
+        # 'hmt_functional',
+        # 'hmt_subfunctional',
+        'pog',
+        # 'pog_alias',
+        'id_or_non_id',
+        'cap_or_cur',
+        'cg_lg_or_pc',
+        'nuts_region',
         'tax_year',
         'amount'
-    ])
+    ]
+    cleancsv = csv.DictWriter(out, fieldnames=fields, extrasaction='ignore')
+
+    cleancsv.writeheader()
 
     spending_years = ['04_05', '05_06', '06_07', '07_08', '08_09', '09_10', '10_11']
 
@@ -282,21 +287,22 @@ def cra2010_clean(config, out=sys.stdout):
             pog_alias = joint_item['pog_alias']
 
             if pog_alias.startswith(pog + ' '):
-                pog_alias = pog_alias[len(pog + ' '):]
+                joint_item['pog_alias'] = pog_alias[len(pog + ' '):]
 
-            row = [
-                uid_generator(tax_year),
-                joint_item['dept_code'], joint_item['dept_name'],
-                cofog_codes[0], cofog_names[0], wdmmg_color(cofog_codes[0]),
-                cofog_codes[1], cofog_names[1], wdmmg_color(cofog_codes[1]),
-                cofog_codes[2], cofog_names[2], wdmmg_color(cofog_codes[2]),
-                joint_item['hmt_1'], joint_item['hmt_2'],
-                pog, pog_alias,
-                joint_item['id_or_non_id'], joint_item['cap_or_cur'],
-                joint_item['cg_lg_or_pc'], joint_item['nuts_region'],
-                tax_year, "%.2f" % amount
-            ]
-
+            row = dict(joint_item)
+            row.update({
+                'recid': uid_generator(tax_year),
+                'cofog_level1_code': cofog_codes[0],
+                'cofog_level1_name': cofog_names[0],
+                'cofog_level2_code': cofog_codes[1],
+                'cofog_level2_name': cofog_names[1],
+                'cofog_level3_code': cofog_codes[2],
+                'cofog_level3_name': cofog_names[2],
+                'hmt_functional': row['hmt_1'],
+                'hmt_subfunctional': row['hmt_2'],
+                'tax_year': tax_year,
+                'amount': "%.2f" % amount
+                })
             cleancsv.writerow(row)
 
     #####################################
