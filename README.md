@@ -7,13 +7,17 @@ To use this package you will need to have [Python](http://python.org),
 The remaining dependencies will then be installed by the following sequence of
 commands.
 
-    $ virtualenv pyenv
-    $ source pyenv/bin/activate
-    $ pip install -e .
+    virtualenv pyenv
+    source pyenv/bin/activate
+    pip install -e .
 
 You can then run the conversion from Excel files to flat CSV by running:
 
-    $ cratools csvexport > cra_2010.csv
+    cratools csvexport
+
+This will generate an output csv file at:
+
+    data/cra.csv
 
 This command may complain that you don't have all the data files you need. In
 particular, the ~5MB CRA data files are not included in this repository, and
