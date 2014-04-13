@@ -4,3 +4,4 @@
 /unmatched_table10.csv
 /pyenv
 /*.egg-info
+*.pyc
