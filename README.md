@@ -1,3 +1,26 @@
+The HM Treasury Country and Regional Analysis (CRA) dataset shows where in the
+country benefit has been had from the spending of each government department.
+
+The CRA is a data set produced annually by the HM Treasury and is part of their
+Public Expenditure and Statistical Analysis (PESA). The data is produced by
+each government department and collected by the Treasury in February. Each
+government department has to determine which parts of the country have
+benefited from spending in its different programs (Program Object Groups --
+POGs). Each department defines their own POGs and the Treasury require that the
+departments fit their POGS under COFOG functions.
+
+Public Expenditure Statistical Analyses (PESA) is published by HM Treasury,
+annually soon after the Budget. It is public spending by combinations of:
+
+* Government function (defined by the UN Classification Of the Functions Of
+  Government (COFOG) for 2007 onwards)
+* Government department
+* Area of the country (defined by the NUTS12 classification system)
+* Time (estimates of future spending and reviews of past spending) 
+* Forms of aggregation (this includes dividing spending between DEL and AME,
+  resource (near-cash and non-cash) and capital, and administration and
+  programme budgets).
+
 # cratools: tools to extract and load the UK's Country Regional Analysis into OpenSpending
 
 ## Usage
