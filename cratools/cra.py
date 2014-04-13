@@ -239,6 +239,8 @@ def cra2010_clean(config, out=sys.stdout):
     #####################################
     fields = [
         'recid',
+        'year',
+        'amount',
         'dept_code',
         # 'dept_name',
         'cofog_level1_code',
@@ -258,18 +260,36 @@ def cra2010_clean(config, out=sys.stdout):
         'id_or_non_id',
         'cap_or_cur',
         'cg_lg_or_pc',
-        'nuts_region',
-        'tax_year',
-        'amount'
+        'nuts_region'
     ]
-    cleancsv = csv.DictWriter(out, fieldnames=fields, extrasaction='ignore')
+    cleancsv = csv.DictWriter(out, fieldnames=fields, extrasaction='ignore', lineterminator='\n')
 
     cleancsv.writeheader()
 
     spending_years = ['04_05', '05_06', '06_07', '07_08', '08_09', '09_10', '10_11']
 
+    departments = {}
+    pogs = {}
+
     for joint_item in joint_items:
         cofog_codes, cofog_names = cofog_from_hmt(joint_item['hmt_1'], joint_item['hmt_2'])
+
+        pog = joint_item['pog']
+        pog_alias = joint_item['pog_alias']
+
+        if pog_alias.startswith(pog + ' '):
+            pog_alias = pog_alias[len(pog + ' '):]
+        joint_item['pog_alias'] = pog_alias
+
+        # assume this is an error where 99999 in excel has been parsed as a
+        # float
+        # Note 99999 is the "Dummy" Programme code (i.e. no programme)
+        if pog == '99999.0': pog = '99999'
+
+        if pog not in pogs:
+            pogs[pog] = pog_alias
+        if joint_item['dept_code'] not in departments:
+            departments[joint_item['dept_code']] = joint_item['dept_name']
 
         for year in spending_years:
             tax_year = '20' + year[:2]
@@ -283,17 +303,6 @@ def cra2010_clean(config, out=sys.stdout):
 
             amount = 0 if source_amount == '' else AMOUNT_MULTIPLIER * float(source_amount)
 
-            pog = joint_item['pog']
-            pog_alias = joint_item['pog_alias']
-
-            if pog_alias.startswith(pog + ' '):
-                joint_item['pog_alias'] = pog_alias[len(pog + ' '):]
-
-            # assume this is an error where 99999 in excel has been parsed as a
-            # float
-            # Note 99999 is the "Dummy" Programme code (i.e. no programme)
-            if pog == '99999.0': pog = '99999'
-
             row = dict(joint_item)
             row.update({
                 'recid': uid_generator(tax_year),
@@ -305,10 +314,20 @@ def cra2010_clean(config, out=sys.stdout):
                 'cofog_level3_name': cofog_names[2],
                 'hmt_functional': row['hmt_1'],
                 'hmt_subfunctional': row['hmt_2'],
-                'tax_year': tax_year,
+                'year': tax_year,
                 'amount': "%.2f" % amount
                 })
             cleancsv.writerow(row)
+
+    writer = csv.writer(open('data/departments.csv', 'w'), lineterminator='\n')
+    writer.writerow(['code', 'name'])
+    for k in sorted(departments.keys()):
+        writer.writerow([k,departments[k]])
+
+    writer = csv.writer(open('data/pogs.csv', 'w'), lineterminator='\n')
+    writer.writerow(['code', 'name'])
+    for k in sorted(pogs.keys()):
+        writer.writerow([k,pogs[k]])
 
     #####################################
     # Write unmatched items to CSV.

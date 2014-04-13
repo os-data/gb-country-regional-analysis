@@ -47,7 +47,7 @@ def main():
         return 1
 
     from cra import cra2010_clean
-    out = file('data/cra-2010.csv', 'w')
+    out = file('data/cra.csv', 'w')
     # out=sys.stdout
     cra2010_clean(config, out=out)
 
