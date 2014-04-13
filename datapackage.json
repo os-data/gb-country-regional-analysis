@@ -4,22 +4,164 @@
   "homepage": "https://www.gov.uk/government/publications/public-expenditure-statistical-analyses-2010",
   "version": "0.1.0",
   "license": "PDDL-1.0",
-  "sources": [{
-    "name": "HM Treasury PESA 2010",
-    "web": "https://www.gov.uk/government/publications/public-expenditure-statistical-analyses-2010",
-    "resources": [{
-      "name": "2010-chapter9",
-      "path": "archive/pesa_2010_database_tables_chapter9.xls",
-      "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter9.xls"
-      },
-      {
-        "name": "2010-chapter10",
-        "path": "archive/pesa_2010_database_tables_chapter9.xls",
-        "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter10.xls"
-      }
-    ]
-  }],
+  "sources": [
+    {
+      "name": "HM Treasury PESA 2010",
+      "web": "https://www.gov.uk/government/publications/public-expenditure-statistical-analyses-2010",
+      "resources": [
+        {
+          "name": "2010-chapter9",
+          "path": "archive/pesa_2010_database_tables_chapter9.xls",
+          "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter9.xls"
+        },
+        {
+          "name": "2010-chapter10",
+          "path": "archive/pesa_2010_database_tables_chapter9.xls",
+          "url": "http://www.hm-treasury.gov.uk/d/pesa_2010_database_tables_chapter10.xls"
+        }
+      ]
+    }
+  ],
   "resources": [
+    {
+      "name": "cra",
+      "title": "Country and Regional Analysis Database",
+      "path": "data/cra.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 11523343,
+      "schema": {
+        "fields": [
+          {
+            "name": "recid",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "year",
+            "type": "integer",
+            "description": ""
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "description": ""
+          },
+          {
+            "name": "dept_code",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "cofog_level1_code",
+            "type": "integer",
+            "description": ""
+          },
+          {
+            "name": "cofog_level2_code",
+            "type": "number",
+            "description": ""
+          },
+          {
+            "name": "cofog_level3_code",
+            "type": "number",
+            "description": ""
+          },
+          {
+            "name": "pog",
+            "type": "string",
+            "description": "Programme Object Group"
+          },
+          {
+            "name": "id_or_non_id",
+            "type": "string",
+            "description": "Identifiable or non-identifiable expenditure (some expenditure cannot be broken down to a specific geographic area)"
+          },
+          {
+            "name": "cap_or_cur",
+            "type": "string",
+            "description": "Capital or current expenditure"
+          },
+          {
+            "name": "cg_lg_or_pc",
+            "type": "string",
+            "description": "Central government (cg), local government "
+          },
+          {
+            "name": "nuts_region",
+            "type": "string",
+            "description": "Geographic region (NUTS classification)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "departments",
+      "title": "Department Codes and Names as used in the CRA",
+      "path": "data/departments.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 3459,
+      "schema": {
+        "fields": [
+          {
+            "name": "code",
+            "type": "string",
+            "description": "Department code (unique)"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "primaryKey": "code"
+      }
+    },
+    {
+      "name": "nuts_pop",
+      "path": "data/nuts_pop.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 328,
+      "schema": {
+        "fields": [
+          {
+            "name": "Region",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Population",
+            "type": "integer",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "pogs",
+      "title": "Programme Object Groups Codes and Names as used in CRA",
+      "path": "data/pogs.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 99247,
+      "schema": {
+        "fields": [
+          {
+            "name": "code",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "primaryKey": "code"
+      }
+    }
   ],
   "repository": "git://github.com/openspending/dpkg-cra.git"
 }

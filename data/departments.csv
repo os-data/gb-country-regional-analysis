@@ -1,0 +1,90 @@
+code,name
+ARA035,Assets Recovery Agency
+BTI013,UK Trade and Investment
+CAB010,Cabinet Office
+CES014,Crown Estate Office
+CEX086,HMT Central Exchequer
+CPS016,The Crown Prosecution Service
+DCM048,"Department for Culture, Media and Sport"
+DEC066,Department of Energy and Climate Change
+DES022,Department for Education
+DFT004,Department for Transport
+DID030,Department for International Development
+DNS049,National Savings and Investments
+DOH033,Department of Health
+DPM085,Department of Communities and Local Government
+DTI084,"Department for Business, Innovation and Skills"
+DWP032,Department for Work and Pensions
+Dept003,"Department for Environment, Food and Rural Affairs"
+Dept004,Department for Transport
+Dept005,Office for National Statistics
+Dept006,Postal Services Commission
+Dept009,Charity Commission
+Dept010,Cabinet Office
+Dept013,UK Trade and Investment
+Dept016,The Crown Prosecution Service
+Dept017,Ministry of Defence
+Dept019,Serious Fraud Office
+Dept020,Office of Gas and Electricity Markets
+Dept022,Department for Education
+Dept025,Export Credits Guarantee Department
+Dept026,Food Standards Agency
+Dept027,Foreign and Commonwealth Office
+Dept030,Department for International Development
+Dept032,Department for Work and Pensions
+Dept033,Department of Health
+Dept034,Home Office
+Dept041,HM Revenue and Customs
+Dept045,Land Registry
+Dept047,Ministry of Justice
+Dept048,"Department for Culture, Media and Sport"
+Dept050,National Audit Office
+Dept057,Office of Water Services
+Dept061,Deputy Prime Minister's Office
+Dept062,National School of Government
+Dept066,Department of Energy and Climate Change
+Dept067,The National Archives: Public Record Office and Historical Manuscripts Commission
+Dept074,Office of Fair Trading
+Dept075,Scottish Executive and its departments
+Dept084,"Department for Business, Innovation and Skills"
+Dept085,Department of Communities and Local Government
+Dept087,HM Treasury
+Dept088,Office of the Rail Regulator
+Dept089,HM Procurator General and Treasury Solicitor
+Dept090,National Assembly for Wales
+ECG025,Export Credits Guarantee Department
+EFR003,"Department for Environment, Food and Rural Affairs"
+ELC011,Electoral Commission
+ENG_HRA,ENG_HRA
+England LA data,ENG_LA
+FCO027,Foreign and Commonwealth Office
+GAD031,Government Actuary`s Department
+GEO064,Government Equalities Office
+HGT089,HM Procurator General and Treasury Solicitor
+HMT087,HM Treasury
+HOA038,House of Commons - Admin
+HOC036,House of Commons
+HOF034,Home Office
+HOL037,House of Lords
+ILR041,HM Revenue and Customs
+IPS069,Independent Parliamentary Standards Authority
+LCD047,Ministry of Justice
+MOD017,Ministry of Defence
+NAO050,National Audit Office
+NAW090,National Assembly for Wales
+NIC081,Northern Ireland Court Service
+NIE099,Northern Ireland Departments
+NIO081,Northern Ireland Office
+Northern Irish LG Adjustment/Input,Northern Irish Local Government Adjustment/Input
+ONS005,Office for National Statistics
+OPC060,Office of the Parliamentary Commissioner for Administration and Health Service Commissioners for England
+PCO065,Privy Council Office
+PRO067,The National Archives: Public Record Office and Historical Manuscripts Commission
+RCP046,Revenue and Customs Prosecution Office
+RMT087,Royal Mint
+SCO042,Scotland Office
+SCT075,Scottish Executive and its departments
+Scottish LG Adjustment/Input,Scottish Local Government Adjustment/Input
+TSC068,The Supreme Court
+WOF091,Wales Office
+Welsh LG Adjustment/Input,Welsh Local Government Adjustment/Input
