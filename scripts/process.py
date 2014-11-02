@@ -32,7 +32,7 @@ class Config(object):
     def archive_file(self, name):
         return self.data_file(name, filedir=self.data['archive_dir'])
 
-parser = optparse.OptionParser("cratools csvexport")
+parser = optparse.OptionParser("python process.py csvexport")
 parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0)
 
 def main():
@@ -50,4 +50,7 @@ def main():
     out = file('data/cra.csv', 'w')
     # out=sys.stdout
     cra2010_clean(config, out=out)
+
+if __name__ == '__main__':
+    main()
 

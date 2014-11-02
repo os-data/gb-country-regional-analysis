@@ -21,38 +21,22 @@ annually soon after the Budget. It is public spending by combinations of:
   resource (near-cash and non-cash) and capital, and administration and
   programme budgets).
 
-# cratools: tools to extract and load the UK's Country Regional Analysis into OpenSpending
+# Data
 
-## Usage
+See `data` directory. Details are in `datapackage.json`.
 
-To use this package you will need to have [Python](http://python.org),
-[pip](http://www.pip-installer.org) and [virtualenv](http://virtualenv.org).
-The remaining dependencies will then be installed by the following sequence of
-commands.
+# Preparation
 
-    virtualenv pyenv
-    source pyenv/bin/activate
-    pip install -e .
-
-You can then run the conversion from Excel files to flat CSV by running:
-
-    cratools csvexport
-
-This will generate an output csv file at:
-
-    data/cra.csv
-
-This command may complain that you don't have all the data files you need. In
-particular, the ~5MB CRA data files are not included in this repository, and
-you will need to download them as per the instructions in the error message.
+See `scripts/README.md` for instructions on running the scripts to obtain and
+prepare the data.
 
 ## Unmatched rows
 
-CRA Table 9 has regional breakdown, while table 10 has COFOG2 codes. `cratools csvexport`
+CRA Table 9 has regional breakdown, while table 10 has COFOG2 codes. The scripts
 combines them and deals with inconsistencies. If there are any rows that can't
 be matched, they'll be dumped into files called `unmatched_table9.csv` and
 `unmatched_table10.csv`. Very often these will be small typos that you can then
-go and fix in the source files by hand before rerunning `cratools csvexport`.
+go and fix in the source files by hand before rerunning the scripts.
 
 ## Data warnings
 
@@ -122,3 +106,4 @@ Here are the noteworthy ones:
     data says function is "Social protection" and subfunction is "blah, blah
     (social exclusion)" I assume I should use 10.7. However, when both function
     and subfunction say "Social protection" is it valid to use 10.9?
+
