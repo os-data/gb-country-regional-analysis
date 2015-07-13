@@ -1,8 +1,17 @@
 {
   "name": "os-gb-gov-cra",
   "title": "Country and Regional Analyses (CRA) - UK Government Finances",
+  "profiles": {
+     "openspending": "*",
+     "tabular": "*"
+  },
   "homepage": "https://www.gov.uk/government/publications/public-expenditure-statistical-analyses-2010",
-  "version": "0.1.0",
+  "owner": "openspending",
+  "team": ["openspending", "rgrp", "nickstenning", "tryggvib"],
+  "granularity": "transactional",
+  "status": "executed",
+  "location": "gb",
+  "version": "0.2.0",
   "license": "PDDL-1.0",
   "sources": [
     {
@@ -92,6 +101,15 @@
             "type": "string",
             "description": "Geographic region (NUTS classification)"
           }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "dept_code",
+            "reference": {
+              "resource": "departments",
+              "fields": "code"
+            }
+          }
         ]
       }
     },
@@ -163,5 +181,18 @@
       }
     }
   ],
-  "repository": "git://github.com/openspending/dpkg-cra.git"
+  "repository": "git://github.com/openspending/dpkg-cra.git",
+  "mapping": {
+      "id": "cra/recid",
+      "amount": {
+	  "source": "cra/amount",
+	  "currency": "GBP",
+	  "factor": 1
+      },
+      "date": "cra/year",
+      "payer": {
+	  "id": "cra/dept_code",
+	  "title": "departments/name"
+      }
+  }
 }
