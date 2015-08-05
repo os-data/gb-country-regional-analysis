@@ -235,7 +235,7 @@
       // makeRoot function (to set the root node)
       if (state.drilldowns) {
         CSV.fetch({
-          url: '/aggregates/by-department.csv'
+          url: '../aggregates/by-department.csv'
         }).done(function(dataset) {
           var drilldowns = ['cofog_level1_code', 'dept_code'],
               dataset_currency = "GBP",
