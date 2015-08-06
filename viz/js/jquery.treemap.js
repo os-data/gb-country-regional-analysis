@@ -235,29 +235,61 @@
       // makeRoot function (to set the root node)
       if (state.drilldowns) {
         CSV.fetch({
-          url: '/aggregates/by-department.csv'
+          url: '/aggregates/by-cofog1-then-department.csv'
         }).done(function(dataset) {
-          var drilldowns = ['cofog_level1_code', 'dept_code'],
-              dataset_currency = "GBP",
+          var levels = dataset.fields.slice(0,dataset.fields.length - 1),
               amount_col_name = 'value',
-              amount_col = dataset.fields.indexOf(amount_col_name),
-              out = {"id": "root",
-                     "amount": 0,
-                     "level": 0,
-                     "currency": dataset_currency,
-                     "children": {}};
+              amount_col = dataset.fields.indexOf(amount_col_name);
+          
+          function slugify(text)  {
+            // https://gist.github.com/mathewbyrne/1280286
+            return text.toString().toLowerCase()
+              .replace(/\s+/g, '-')           // Replace spaces with -
+              .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+              .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+              .replace(/^-+/, '')             // Trim - from start of text
+              .replace(/-+$/, '');            // Trim - from end of text
+          }
+          
+          function Node(level,id,name,amount,currency) {
+            this.id = id;
+            this.name = name;
+            this.amount = amount;
+            this.level = level;
+            this.children = [];
+            this.currency = currency;
+            this.addchild = function (node) {
+              for (var i in tree.children) {
+                var child = tree.children[i];
+                if (child.id === node.id) {
+                  // found existing id, so add new amount to existing amount
+                  child.amount += node.amount;
+                  return child;
+                }
+              }
+              // else push new node
+              this.children.push(node);
+              return node;
+            };
+          }
+          
+          var tree = new Node(0,"root","root",0,"GBP");
           
           dataset.records.forEach(function(row) {
-            var node = out.children;
-            node[row[0]] = {"amount": Number(row[amount_col]) + ((typeof(node[row[0]]) !== "undefined") ? Number(node[row[0]].amount) : 0),
-                            "children": {},
-                            "name": String(row[0]),
-                            "id": "root__" + String(row[0]),
-                            "currency": dataset_currency};
-            out.amount += Number(row[amount_col]);
+            var maker = function(node,ls,i) {
+              if (i === (levels.length)) {
+                //      return 0;
+              } else {
+                maker(node.addchild(new Node(i+1,slugify(row[i]),row[i],Number(row[amount_col]),"GBP")),levels,i+1);
+              }
+              if (i === 0) {
+                tree.amount += Number(row[amount_col]);
+              }
+            };
+            maker(tree,levels,0);
           });
           
-          makeRoot(out);
+          makeRoot(tree);
         });
         
         // var aggregator = new OpenSpending.Aggregator();
