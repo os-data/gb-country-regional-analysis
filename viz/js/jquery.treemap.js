@@ -235,7 +235,7 @@
       // makeRoot function (to set the root node)
       if (state.drilldowns) {
         CSV.fetch({
-          url: '/aggregates/by-department.csv'
+          url: '../aggregates/by-department.csv'
         }).done(function(dataset) {
           var levels = dataset.fields.slice(0,dataset.fields.length - 1),
               amount_col_name = 'value',
