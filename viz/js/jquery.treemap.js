@@ -235,11 +235,12 @@
       // makeRoot function (to set the root node)
       if (state.drilldowns) {
         CSV.fetch({
-          url: '../aggregates/by-department.csv'
+          url: config.data.aggregated_csv_url
         }).done(function(dataset) {
           var levels = dataset.fields.slice(0,dataset.fields.length - 1),
-              amount_col_name = 'value',
-              amount_col = dataset.fields.indexOf(amount_col_name);
+              amount_col_name = config.data.amount_col_name || "amount",
+              amount_col = dataset.fields.indexOf(amount_col_name),
+              currency = config.data.currency;
           
           function slugify(text)  {
             // https://gist.github.com/mathewbyrne/1280286
@@ -273,14 +274,15 @@
             };
           }
           
-          var tree = new Node(0,"root","root",0,"GBP");
+          var tree = new Node(0,"root","root",0,currency);
           
           dataset.records.forEach(function(row) {
             var maker = function(node,ls,i) {
               if (i === (levels.length)) {
                 //      return 0;
               } else {
-                maker(node.addchild(new Node(i+1,slugify(row[i]),row[i],Number(row[amount_col]),"GBP")),levels,i+1);
+                console.log(i);
+                maker(node.addchild(new Node(i+1,slugify(row[i]),row[i],Number(row[amount_col]),currency)),levels,i+1);
               }
               if (i === 0) {
                 tree.amount += Number(row[amount_col]);

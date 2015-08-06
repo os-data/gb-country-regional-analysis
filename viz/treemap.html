@@ -18,7 +18,17 @@
     <script src="./js/csv.js"></script>
     <script src="./js/jquery.treemap.js"></script>
     <script 'text/javascript'>
-      $('#treemap').treemap({});
+      var data = {
+      currency: "GBP",
+      aggregated_csv_url: "../aggregates/by-cofog1-then-cofog2-then-department.csv",
+      amount_col_name: "value"
+      };
+
+      var options = {
+      data: data
+      };
+      
+      $('#treemap').treemap(options);
     </script>
   </body>
 </html>
