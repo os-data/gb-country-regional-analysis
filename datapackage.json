@@ -12,6 +12,7 @@
   "status": "executed",
   "location": "gb",
   "version": "0.2.0",
+  "countryCode": "UK",
   "license": "PDDL-1.0",
   "sources": [
     {
