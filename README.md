@@ -51,7 +51,7 @@ It was! I have been able to fix several errors and omissions. However, there
 are still some hard ones that I would like some help with. There is some
 partially helpful advice from HM Treasury here:
 
-<http://epp.eurostat.ec.europa.eu/cache/ITY_OFFPUB/KS-RA-07-022/EN/KS-RA-07-022-EN.PDF>
+http://epp.eurostat.ec.europa.eu/cache/ITY_OFFPUB/KS-RA-07-022/EN/KS-RA-07-022-EN.PDF
 
 Here are the noteworthy ones:
 
