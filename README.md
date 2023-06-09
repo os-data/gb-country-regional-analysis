@@ -40,7 +40,7 @@ go and fix in the source files by hand before rerunning the scripts.
 
 ## Data warnings
 
-This section is largely transcribed from e-mail: <http://lists.okfn.org/pipermail/wdmmg-discuss/2010-April/000165.html>
+This section is largely transcribed from e-mail: http://lists.okfn.org/pipermail/wdmmg-discuss/2010-April/000165.html
 
 The "function" and "subfunction" columns of the published CRA data contain broken
 data, and that we have been using a mapping designed by William Waites to fix
